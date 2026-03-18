@@ -20,11 +20,11 @@ public class Transaction {
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
-    @ManyToOne
-    private Account sender;
+    @ManyToOne // une transaction appatient a un compte
+    private Account sender;// celui qui sera debiter
 
-    @ManyToOne
-    private Account receiver;
+    @ManyToOne//une transaction appatient a un compte
+    private Account receiver; // celui qui sera crediteur
 
 
 }

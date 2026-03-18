@@ -21,8 +21,8 @@ public class Account {
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne // permet de definir la relation
+    @JoinColumn(name = "user_id") // joindre au champ user_id dans Account
     private User user;
 
 

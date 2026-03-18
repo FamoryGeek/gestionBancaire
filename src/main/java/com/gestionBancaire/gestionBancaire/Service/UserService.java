@@ -11,26 +11,26 @@ import java.util.List;
 
 @Service
 public class UserService {
+    // permet de faire l'injection de dependance
     @Autowired
     private UserRepository userRepository;
 
-    //TOUS LES USER
+    //Permet de recuperer tous les users
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
 
-    //USER BY ID
+    //Permet de recuperer  un seul user
     public User getUserById (Long id){
         return userRepository.findById(id).orElseThrow(()-> new RuntimeException("Utilisateur Introuvable"));
-
     }
 
-    //CREATE
+    //CREER UN USER
     public User createUser(User user){
         return userRepository.save(user);
     }
 
-    //UPDATE
+    //Mettre a jour un user
     public User userUpdate(Long id, User userDetails){
         User user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("Utilisateur introuvable"));
         user.setRole(userDetails.getRole());
