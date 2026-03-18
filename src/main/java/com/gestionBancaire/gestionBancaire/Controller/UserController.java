@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("api/users")
+@RestController //permet de creer des API Rest
+@RequestMapping("api/users") // permet de definir l'Url de note API
 public class UserController {
     @Autowired
     private UserService userService;

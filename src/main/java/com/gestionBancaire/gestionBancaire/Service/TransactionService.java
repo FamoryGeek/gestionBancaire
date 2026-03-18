@@ -33,20 +33,23 @@ public class TransactionService {
     @Transactional
     public Transaction createTransaction(Long senderId, Long receiverId, double montant, String libelle) {
 
+        // verifie si le compte de l'envoyeur existe
         Account sender = accountRepository.findById(senderId)
                 .orElseThrow(() -> new RuntimeException("Compte source introuvable"));
 
+        // verifie si le compte de receveur existe
         Account receiver = accountRepository.findById(receiverId)
                 .orElseThrow(() -> new RuntimeException("Compte destinataire introuvable"));
 
+        //verifier si le solde est suffisant avant l'envoie
         if (sender.getSolde() < montant) {
             throw new RuntimeException("Solde insuffisant");
         }
 
-        // débit
+        // débite l'envoyeur
         sender.setSolde(sender.getSolde() - montant);
 
-        // crédit
+        // crédite le receveur
         receiver.setSolde(receiver.getSolde() + montant);
 
         accountRepository.save(sender);
@@ -59,6 +62,7 @@ public class TransactionService {
         transaction.setReceiver(receiver);
         transaction.setCreated_at(LocalDateTime.now());
 
+        //Sauvegarder
         return transactionRepository.save(transaction);
     }
 
